@@ -3,6 +3,7 @@
 module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-simple-mocha');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.initConfig({
     jshint: {
@@ -11,15 +12,7 @@ module.exports = function(grunt) {
       },
 
       options: {
-        node: true,
-        globals: {
-          describe: true,
-          it: true,
-          before: true,
-          after: true,
-          beforeEach: true,
-          afterEach: true
-        }
+        jshintrc: true
       }
     },
 
@@ -30,11 +23,18 @@ module.exports = function(grunt) {
 
       options: {
         globals: ['should'],
-        timeout: 3000,
+        timeout: 4500,
         ignoreLeaks: false,
         grep: '',
         ui: 'bdd',
         reporter: 'tap'
+      }
+    },
+
+    watch: {
+      scripts: {
+        files: ['*.js', 'test/**/*.js'],
+        tasks: ['jshint']
       }
     }
   });
